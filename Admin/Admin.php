@@ -1,30 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="./All.css">
-    <link rel="stylesheet" href="./component.css">
-    <link rel="stylesheet" href="./style.css">
-    
-</head>
-<body>
-    <div class="container">
-
-    <div class="content">
-        <h3>Admin<span>Page</span></h3>
-        <h1>Welcome To SCMS <span></span></h1>
-        <p>This is our admin page</p>
-        <a href="ALogin.php" class="btn primary_btn">Login</a>
-        <a href="Home.php" class="btn primary_btn">Home</a>
-        <a href="Services.php" class="btn primary_btn">Services</a>
-        <a href="logout.php" class="btn primary_btn">Logout</a>
-        
-    </div>
-</div>
+<?php
+session_start();
+if(!(isset($_SESSION['adminauth'])) && !($_SESSION['adminauth']=='auth')){
+    header('location: index.php');
+}
+require('../templates/connection.php');
 
 
-</body>
-</html>
+
+
+
+if($_SERVER["REQUEST_METHOD"]=="GET"){
+    if(isset($_GET['sid'])){
+        $sid = $_GET['sid'];
+        $status = $_GET['status'];
+        echo $userid;
+
+        $query = "UPDATE booking SET status='$status' WHERE sid='$sid'";
+        if(mysqli_query($conn, $query)){
+            echo "done";
+            
+        }
+    }
+}
+
+
+
+?>

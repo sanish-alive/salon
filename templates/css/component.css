@@ -114,6 +114,8 @@ footer{
     .footer__col4{
     flex:2;
     color:black;
+    list-style: none;
+
 }
 .footer__desc{
     max-width:300px;
@@ -134,7 +136,6 @@ footer{
 .footer__text a{
     font-size: 1.8rem;
     margin-bottom: 1rem;
-
 }
 }
 #copyright{
@@ -228,6 +229,7 @@ footer{
     padding:0.5rem;
     border-radius:12px;
 }
+
 .serviceGrid__item__img{
     flex:4;
 }
@@ -261,14 +263,14 @@ footer{
 }
 @media only screen and (min-width:768px){
     .serviceGrid__title{
-        fonr-size:2.4rem;
+        font-size:2.4rem;
     }
     .serviceGrid__wrapper{
-        grid-template-columns::repeat(auto-fit,minmax(350px,1fr))
-        gap:3rem;
+        grid-template-columns:repeat(auto-fit,minmax(350px,1fr))
+        gap=3rem;
     }
     .serviceGrid__item{
-        flex-direstion:row;
+        flex-direction:row;
         padding:1.5rem;
         gap:1rem;
 

@@ -42,6 +42,7 @@ if(isset($_POST['submit'])){
     <link rel="stylesheet" href="css/All.css">
     <link rel="stylesheet" href="css/style.css">
     
+    
 </head>
 <body>
 
@@ -49,19 +50,68 @@ if(isset($_POST['submit'])){
 <!--FORM-->
 <div class="form-container">
     
-    <form action="#" method="POST">
+    <form id="form" method="POST">
         <h3>Login</h3>
         
-        <input type="email" name="email" required placeholder="Enter Your Email">
+        <input id="name" type="email" name="email" required placeholder="Enter Your Email">
         
-        <input type="password" name="pwd" required placeholder="Enter Your Password">
+        <input id="password" type="password" name="pwd" required placeholder="Enter Your Password">
 
         <input type="submit" name="submit" value="Login now" class="primary_btn">
         <p>Don't have an account?<a href="register.php">Register now</a></p>
+
         </form>
+
 </div>
 <!--END-->
-        
+<script>
+const form=document.getElementById('form')
+const email =document.getElementById('email')
+const password=document.getElementById('password')
+
+form.addEventListener('submit',(e) =>{
+    e.preventDefault();
+
+    checkInputs();
+});
+
+fucntion checkInputs(){
+
+    const emailValue=email.value.trim();
+    const passwordValue=password.value.trim();
+
+
+fucntion setError(input,message){
+    const form-container=input.parentElement;
+    const small=form-container.querySelector('small');
+
+    small.innertext=message;
+    formControl.className='form-c'
+}
+
+
+    if(emailValue === ''){
+        setError(email,'Email is required');
+    }else if(!isValidEmail(emailValue)){
+        setError(email,'Provide a valid email address');
+    }
+    else{
+        setSuccess(email);
+    }
+
+    if(passwordValue === ''){
+        setError(password,'Password is required');
+    }else if(passwordValue.length<8){
+        setError(password,'Password must be atleast of 6 character');
+    }
+    else{
+        setSuccess(password);
+    }
+
+};
+
+
+    </script>
     
 </body>
 </html>

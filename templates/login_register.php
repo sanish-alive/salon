@@ -9,7 +9,7 @@ if(isset($_POST['submit']))
     $pwd = $_POST['pwd'];
     $cpwd = $_POST['cpwd'];
 
-    $user_exist_query="SELECT * FROM UserProfile WHERE username='$username' OR email='$email'";
+    $user_exist_query="SELECT * FROM userprofile WHERE username='$username' OR email='$email'";
     $result=mysqli_query($conn,$user_exist_query);
     if($pwd != $cpwd){
         echo "
@@ -56,7 +56,7 @@ if(isset($_POST['submit']))
     
         else #it will be executed if no has taken username and email
         {
-            $query="INSERT INTO UserProfile (`username`, `email`, `pwd`) VALUES ('$username','$email','$pwd')";
+            $query="INSERT INTO userprofile (`username`, `email`, `pwd`) VALUES ('$username','$email','$pwd')";
             if(mysqli_query($conn,$query))
             {
               #if data inserted successfully

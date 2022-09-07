@@ -1,3 +1,11 @@
+<?php
+session_start();
+$auth=1;
+if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth'){
+    $auth="Logined";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,7 +69,20 @@
     <li> <a href="Services.php" class="nav__link">Services</a></li>
     <li> <a href="About.php" class="nav__link">About Us</a></li>
     <li><a href="Contact.php" class="nav__link">Contact</a></li>
-    <li></li><a href="Login.php" class="nav__link">Login</a></li>
+    
+    <?php
+    if($auth=="Logined")
+    {
+        echo"<li><a href='userpage.php' class='nav__link'>Profile</a></li>";
+        echo"<li><a href='logout.php' class='nav__link'>Logout</a></li>";
+    }
+    else{
+
+   echo "<li></li><a href='Login.php' class='nav__link'>Login</a></li>";
+    }
+    ?>
+
+
 </div>
 </ul>
 </nav>

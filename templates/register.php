@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth'){
+if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth')
+{
     header('location: userpage.php');
 }
 
@@ -30,7 +31,7 @@ require('connection.php');
         
         <input type="password" name="pwd" required placeholder="Enter Your Password">
         
-        <input type="password" name="cwd" required placeholder="Confirm Your Password">
+        <input type="password" name="cpwd" required placeholder="Confirm Your Password">
         
 
         

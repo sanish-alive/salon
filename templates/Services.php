@@ -1,3 +1,16 @@
+<?php
+session_start();
+$auth=1;
+if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth'){
+    $auth="Logined";
+}
+
+require "connection.php";
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,8 +74,18 @@
     <li> <a href="Services.php" class="nav__link">Services</a></li>
     <li> <a href="About.php" class="nav__link">About Us</a></li>
     <li><a href="Contact.php" class="nav__link">Contact</a></li>
-    <li></li><a href="Login.php" class="nav__link">Login</a></li>
-   
+    <?php
+    if($auth=="Logined")
+    {
+        echo"<li><a href='userpage.php' class='nav__link'>Profile</a></li>";
+        echo"<li><a href='logout.php' class='nav__link'>Logout</a></li>";
+    }
+    else{
+
+   echo "<li></li><a href='Login.php' class='nav__link'>Login</a></li>";
+    }
+    ?>
+    
 </div>
 </ul>
 </nav>
@@ -73,231 +96,44 @@
 <!--Page title-->
 <section id="page__title">
     <div class="container">
-        <h2 class="page__title__text">Explore Our Servies</h2>
+        <h2 class="page__title__text">Explore Our Services</h2>
     </div>
 </section>
-<!--end-->
-<!--Special section-->
-<section id="ourSpecials">
-    <div class="container">
-        <h3 class="ourSpecials__title">Our Specials</h3>
-        <div class="ourSpecials__wrapper">
-            <div class="ourSpecials__item">
-                <div class="ourSpecials__item__img">
-                    <img src="../Images/manicure.png" alt="nails">
-                </div>
-                <div class="ourSpecials__item__info">
-                    <h3 class="ourSpecials__item__title">Manicure</h3>
-                    <h4 class="ourSpecials__item__price">Rs.3000</h4>
-                    <div class="ourSpecials__item__stars">
-                        <img src="../Images/star.png" alt="star">
-                    </div>
-                </div>
-            </div>
-            <div class="ourSpecials__item">
-                <div class="ourSpecials__item__img">
-                    <img src="../Images/spa.png" alt="nails">
-                </div>
-                <div class="ourSpecials__item__info">
-                    <h3 class="ourSpecials__item__title">Hair Spa</h3>
-                    <h4 class="ourSpecials__item__price">Rs.9000</h4>
-                    <div class="ourSpecials__item__stars">
-                        <img src="../Images/star.png" alt="star">
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-<!--End-->
-<!-- Top   Services-->
+
 <section id="Grid">
     <div class="container">
-        <h2 class="serviceGrid__title">
-            Our Top Facilities
-        </h2>
-        <div class="serviceGrid__wrapper">
-            <div class="serviceGrid__item">
+        <div class='serviceGrid__wrapper'>
+    <?php
+    $i = 0;
+    $query = "SELECT * FROM service";
+    $retval = mysqli_query($conn, $query);
+
+    while($data = mysqli_fetch_assoc($retval)){
+
+    ?>
+    
+        
+            <div class="serviceGrid__item" onclick="window.location.href='bookings.php?id=<?php echo $data['sid']; ?>'">
                 <div class="serviceGrid__item__img">
-                    <img src="../Images/hair.png" alt="service">
+                    <img src="../serviceimage/<?php echo $data['simage']; ?>">
                 </div>
                 <div class="serviceGrid__item__info">
-                    <h3 class="serviceGrid__item__title">Hair Colouring and Styling
-                    </h3>
-                    <h3 class="serviceGrid__item__price">Rs.6000</h3>
-                        <div class="serviceGrid__item__stars">
-                            <img src="../Images/star.png" alt="service">
-                        </div>
-                    </div>
+                    <h3 class="serviceGrid__item__title"><?php echo $data['sname']; ?></h3>
+                    <h3 class="serviceGrid__item__price"><?php echo $data['scost']; ?></h3>
+                        
                 </div>
-                <div class="serviceGrid__item">
-                    <div class="serviceGrid__item__img">
-                        <img src="../Images/skin.png" alt="service">
-                    </div>
-                    <div class="serviceGrid__item__info">
-                        <h3 class="serviceGrid__item__title">Facials and Skincare Treatments
-                        </h3>
-                        <h2 class="serviceGrid__item__price">Rs.10000</h2>
-                            <div class="serviceGrid__item__stars">
-                                <img src="../Images/star.png" alt="service">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="serviceGrid__item">
-                        <div class="serviceGrid__item__img">
-                            <img src="../Images/head.png" alt="service">
-                        </div>
-                        <div class="serviceGrid__item__info">
-                            <h3 class="serviceGrid__item__title">Head and Scalp Massages
-                            </h3>
-                            <h2 class="serviceGrid__item__price">Rs.20000</h2>
-                                <div class="serviceGrid__item__stars">
-                                    <img src="../Images/star.png" alt="service">
-                                </div>
-                            </div>
-                        </div>
-    
+            </div>
+            <?php
+    }
+        ?>
+    </div>
         </div>
-        </div>
-    
-    </section>
-    <!--ENd -->
 
-<!--start-->
-    <section id="Grid">
-        <div class="container">
-            <h2 class="serviceGrid__title">
-                Facilities
-            </h2>
-            <div class="serviceGrid__wrapper">
-                <div class="serviceGrid__item">
-                    <div class="serviceGrid__item__img">
-                        <img src="../Images/ped.png" alt="service">
-                    </div>
-                    <div class="serviceGrid__item__info">
-                        <h3 class="serviceGrid__item__title">Pedicure
-                        </h3>
-                        <h3 class="serviceGrid__item__price">Rs.3500</h3>
-                            <div class="serviceGrid__item__stars">
-                                <img src="../Images/star.png" alt="service">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="serviceGrid__item">
-                        <div class="serviceGrid__item__img">
-                            <img src="../Images/mehendi1.png" alt="service">
-                        </div>
-                        <div class="serviceGrid__item__info">
-                            <h3 class="serviceGrid__item__title">Mehendi
-                            </h3>
-                            <h2 class="serviceGrid__item__price">Rs.4500</h2>
-                                <div class="serviceGrid__item__stars">
-                                    <img src="../Images/star.png" alt="service">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="serviceGrid__item">
-                            <div class="serviceGrid__item__img">
-                                <img src="../Images/thread.png" alt="service">
-                            </div>
-                            <div class="serviceGrid__item__info">
-                                <h3 class="serviceGrid__item__title">Threading
-                                </h3>
-                                <h2 class="serviceGrid__item__price">Rs.500</h2>
-                                    <div class="serviceGrid__item__stars">
-                                        <img src="../Images/star.png" alt="service">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="serviceGrid__item">
-                                <div class="serviceGrid__item__img">
-                                    <img src="../Images/bridal.png" alt="service">
-                                </div>
-                                <div class="serviceGrid__item__info">
-                                    <h3 class="serviceGrid__item__title">Bridal Makeover
-                                    </h3>
-                                    <h2 class="serviceGrid__item__price">Rs.25000</h2>
-                                        <div class="serviceGrid__item__stars">
-                                            <img src="../Images/star.png" alt="service">
-                                        </div>
-                                    </div>
-                                </div>
-                                
         
-            </div>
-            </div>
-        
-        </section>
+</section>
         <!--ENd -->
 
-    <!--start-->
-    <section id="Grid">
-        <div class="container">
-            <h2 class="serviceGrid__title">
-                Facilities
-            </h2>
-            <div class="serviceGrid__wrapper">
-                <div class="serviceGrid__item">
-                    <div class="serviceGrid__item__img">
-                        <img src="../Images/wax.png" alt="service">
-                    </div>
-                    <div class="serviceGrid__item__info">
-                        <h3 class="serviceGrid__item__title">Waxing
-                        </h3>
-                        <h3 class="serviceGrid__item__price">Rs.2000</h3>
-                            <div class="serviceGrid__item__stars">
-                                <img src="../Images/star.png" alt="service">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="serviceGrid__item">
-                        <div class="serviceGrid__item__img">
-                            <img src="../Images/2.png" alt="service">
-                        </div>
-                        <div class="serviceGrid__item__info">
-                            <h3 class="serviceGrid__item__title">Party Hairstyle
-                            </h3>
-                            <h2 class="serviceGrid__item__price">Rs.10000</h2>
-                                <div class="serviceGrid__item__stars">
-                                    <img src="../Images/star.png" alt="service">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="serviceGrid__item">
-                            <div class="serviceGrid__item__img">
-                                <img src="../Images/straightening.png" alt="service">
-                            </div>
-                            <div class="serviceGrid__item__info">
-                                <h3 class="serviceGrid__item__title">Hair Straightening
-                                </h3>
-                                <h2 class="serviceGrid__item__price">Rs.3000</h2>
-                                    <div class="serviceGrid__item__stars">
-                                        <img src="../Images/star.png" alt="service">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="serviceGrid__item">
-                                <div class="serviceGrid__item__img">
-                                    <img src="../Images/glam.png" alt="service">
-                                </div>
-                                <div class="serviceGrid__item__info">
-                                    <h3 class="serviceGrid__item__title">Glam Makeover
-                                    </h3>
-                                    <h2 class="serviceGrid__item__price">Rs.20000</h2>
-                                        <div class="serviceGrid__item__stars">
-                                            <img src="../Images/star.png" alt="service">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-        
-            </div>
-            </div>
-        
-        </section>
-        <!--ENd -->
-
+ 
 
 
 <

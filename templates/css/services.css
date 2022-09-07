@@ -63,12 +63,6 @@
     font-weight: 600;
     margin-bottom: 1rem;
 }
-.ourSpecials__item__stars{
-    width:max-content;
-    height:1.5rem;
-    margin-bottom:1rem;
-
-}
 @media only screen and (min-width:768px){
     .ourSpecials__title{
         font-size: 2.4rem;
@@ -108,4 +102,7 @@
 #serviceGrid:last-of-type
 {
     padding-bottom: 10rem;
+}
+.serviceGrid__item__img img {
+    height: 33vh;
 }

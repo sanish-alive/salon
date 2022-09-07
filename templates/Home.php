@@ -1,3 +1,11 @@
+<?php
+session_start();
+$auth=1;
+if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth'){
+    $auth="Logined";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,8 +68,17 @@
     <li> <a href="Services.php" class="nav__link">Services</a></li>
     <li> <a href="About.php" class="nav__link">About Us</a></li>
     <li><a href="Contact.php" class="nav__link">Contact</a></li>
-    <li></li><a href="Login.php" class="nav__link">Login</a></li>
+    <?php
+    if($auth=="Logined")
+    {
+        echo"<li><a href='userpage.php' class='nav__link'>Profile</a></li>";
+        echo"<li><a href='logout.php' class='nav__link'>Logout</a></li>";
+    }
+    else{
 
+   echo "<li></li><a href='Login.php' class='nav__link'>Login</a></li>";
+    }
+    ?>
 </div>
 </ul>
 </nav>
@@ -79,14 +96,14 @@
                 <p class="hero__info">We are here to utilize your time so that you can invest some precious time for 
                     your nails,hair,skin,and body which we don't do it usually. </p>
                 <div class="button__wrapper">
-                    <a href="services.html" class="btn primary_btn">Explore Services</a>
-                    <a href="#" class="btn">Book Time</a>
+                    <a href="services.php" class="btn primary_btn">Explore Services</a>
+                    <a href="services.php" class="btn">Book Time</a>
                 </div>
             </div>
         </div>
         <div class="hero__right">
             <div class="hero__imWrapper">
-                <img src="../Images/home.png" alt="facilities">
+                <img src="../Images/salon.jpg" alt="facilities">
             </div>
         </div>
        </div>
@@ -146,7 +163,7 @@
     <div class="container">
         <div class="ourSpecials__wrapper">
             <div class="ourSpecials__left">
-                <div class="ourSpecials__service">
+                <div class="ourSpecials__service" onclick="window.location.href='bookings.php?service=Deluxe Pedicure'">
                     <div class="ourSpecials__service__img">
                         <img src="../Images/ped.png" alt="spa">
 
@@ -154,7 +171,7 @@
                     <h2 class="ourSpecials__service__title">Deluxe Pedicure</h2>
                     <h3 class="ourSpecials__service__price">Rs.3500</h3>
                     <div class="ourSpecials__service__stars">
-                    <img src="../Images/star.png" alt="stars">
+                    
                     </div>
                     <p class="ourSpecials__service__text">
                     It adds specialized treatments like paraffin wax dip,
@@ -164,7 +181,7 @@
                 </div>
         
             
-                <div class="ourSpecials__service">
+                <div class="ourSpecials__service" onclick="window.location.href='bookings.php?service=Nail Extension'">
                     <div class="ourSpecials__service__img">
                         <img src="../Images/nails.png" alt="spa">
 
@@ -172,7 +189,7 @@
                     <h2 class="ourSpecials__service__title">Nail Extension</h2>
                     <h3 class="ourSpecials__service__price">Rs.5000</h3>
                     <div class="ourSpecials__service__stars">
-                    <img src="../Images/star.png" alt="stars">
+                
                     </div>
                     <p class="ourSpecials__service__text">
                   It provides services for a fee or any cosideration or exchange to cut,
@@ -193,7 +210,7 @@
     proper services at your suitable time.Mainly we focus for your comfort and care.
     We just want best for you.       
    </p>
-   <a href="./Bookings.php" class="btn primary_btn"> Book</a>
+   <a href="./Services.php" class="btn primary_btn"> Book</a>
 
      </div>
     </div>
@@ -208,8 +225,8 @@
     <h2 class="serviceGrid__title">
         Top Facilities
     </h2>
-    <div class="serviceGrid__wrapper">
-        <div class="serviceGrid__item">
+    <div class="serviceGrid__wrapper" >
+        <div class="serviceGrid__item" onclick="window.location.href='bookings.php?service=Hair Coloring and Styling'">
             <div class="serviceGrid__item__img">
                 <img src="../Images/hair.png" alt="service">
             </div>
@@ -217,12 +234,10 @@
                 <h3 class="serviceGrid__item__title">Hair Colouring and Styling
                 </h3>
                 <h3 class="serviceGrid__item__price">Rs.6000</h3>
-                    <div class="serviceGrid__item__stars">
-                        <img src="../Images/star.png" alt="service">
-                    </div>
+                    
                 </div>
             </div>
-            <div class="serviceGrid__item">
+            <div class="serviceGrid__item" onclick="window.location.href='bookings.php?service=Facials and Skincare Treatment'">
                 <div class="serviceGrid__item__img">
                     <img src="../Images/skin.png" alt="service">
                 </div>
@@ -230,12 +245,10 @@
                     <h3 class="serviceGrid__item__title">Facials and Skincare Treatments
                     </h3>
                     <h2 class="serviceGrid__item__price">Rs.10000</h2>
-                        <div class="serviceGrid__item__stars">
-                            <img src="../Images/star.png" alt="service">
-                        </div>
+                        
                     </div>
                 </div>
-                <div class="serviceGrid__item">
+                <div class="serviceGrid__item"onclick="window.location.href='bookings.php?service=Head and Scalp Massaging'">
                     <div class="serviceGrid__item__img">
                         <img src="../Images/head.png" alt="service">
                     </div>
@@ -243,9 +256,7 @@
                         <h3 class="serviceGrid__item__title">Head and Scalp Massages
                         </h3>
                         <h2 class="serviceGrid__item__price">Rs.20000</h2>
-                            <div class="serviceGrid__item__stars">
-                                <img src="../Images/star.png" alt="service">
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -276,7 +287,7 @@
     <div class="container">
      <div class="eventsInfo__wrapper">
         <div class="eventsInfo__left">
-            <div class="eventsInfo__item">
+            <div class="eventsInfo__item" onclick="window.location.href='bookings.php?service=Party Hairstyles'">
                 <div class="eventsInfo__item__img">
                     <img src="../Images/2.png" alternative="1">
                 </div>
@@ -289,12 +300,12 @@
                     </p>
                 </div> 
             </div>
-            <div class="eventsInfo__item">
+            <div class="eventsInfo__item" onclick="window.location.href='bookings.php?service=Mehendi Design'">
                 <div class="eventsInfo__item__img">
                     <img src="../Images/mehendi.png" alternative="1">
                 </div>
                 <div class="eventsInfo__item__info">
-                    <h2 class="eventsInfo__item__title">Mehendi design </h2>
+                    <h2 class="eventsInfo__item__title" >Mehendi design </h2>
                     <p class="eventsInfo__item__text">
                         The traditional mehendi design revolves around flowers, jaal, peacock and
                          mango motifs.To make the mehendi ceremony more fun and stressless we have the management for 
@@ -303,7 +314,7 @@
                     </p>
                 </div> 
             </div>
-            <div class="eventsInfo__item">
+            <div class="eventsInfo__item" onclick="window.location.href='bookings.php?service=Lashes Extension'">
                 <div class="eventsInfo__item__img">
                     <img src="../Images/5.png" alternative="1">
                 </div>
@@ -349,12 +360,8 @@
                     </div>
                     <div class="newsletter__form">
                         <form>
-                            <label for="email">
-                                <input type="email" placeholder=" Your Email Address">
-                            </label>
-                            <button type="submit"><b>Join</b></button>
-
-
+                            
+                                <a href="login.php" class="btn primary_btn"> Click Here to Create New Account</a>
                         </form>
 
                     </div>
@@ -373,7 +380,7 @@
         <div class="footer__wrapper">
             <div class="footer__col1">
                 <div class="footer__logo">
-                <img src="../Images.logs.png" alt="Salon Management">
+                <img src="../Images/logs.png" alt="Salon Management">
                 </div>
                 <p class="footer__desc">
                     Life is just so beautiful like you, just need some time to freshen up.
@@ -498,6 +505,7 @@
 <div id="copyright">
     <div class="container">
         <p class="copyright__text">
+            
             © copyright 2022 Salon Client Management | All rights reserved
 
         </p>

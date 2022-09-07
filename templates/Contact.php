@@ -1,3 +1,26 @@
+<?php
+session_start();
+$auth=1;
+if(isset($_SESSION['auth']) && $_SESSION['auth']=='auth'){
+    $auth="Logined";
+}
+require "connection.php";
+
+if(isset($_POST['submit'])){
+    $firstname = $_POST['first_name'];
+    $lastname = $_POST['last_name'];
+    $email = $_POST['email'];
+    $subject = $_POST['subject'];
+    $message = $_POST['message'];
+
+
+    $query = "INSERT INTO contact(`firstname`, `lastname`, `email`, `subject`, `message`) VALUES ('$firstname', '$lastname', '$email', '$subject', '$message')";
+    if(mysqli_query($conn, $query)){
+        echo "<script>alert('Enquiry added')</script>";
+        header("location: Home.php");
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,8 +84,17 @@
     <li> <a href="Services.php" class="nav__link">Services</a></li>
     <li> <a href="About.php" class="nav__link">About Us</a></li>
     <li><a href="Contact.php" class="nav__link">Contact</a></li>
-    <li></li><a href="Login.php" class="nav__link">Login</a></li>
+    <?php
+    if($auth=="Logined")
+    {
+        echo"<li><a href='userpage.php' class='nav__link'>Profile</a></li>";
+        echo"<li><a href='logout.php' class='nav__link'>Logout</a></li>";
+    }
+    else{
 
+   echo "<li></li><a href='Login.php' class='nav__link'>Login</a></li>";
+    }
+    ?>
 </div>
 </ul>
 </nav>
@@ -124,7 +156,7 @@
     <div class="container">
         <h3 class="forms__title">Contact & Enquiry</h3>
         <div class="forms__wrapper">
-            <form>
+            <form action="#" method="post">
                 <div class="forms__group">
                     <label for="firstName">First Name</label>
                     <input type="text"  id="firstName" name="first_name" required>
@@ -143,14 +175,14 @@
                 
                 <div class="forms__group forms__group__full">
                     <label for="message">Message</label>
-                    <textarea type="message" id="message" name="last_name" cols="30"
+                    <textarea type="message" id="message" name="message" cols="30"
                     rows="10"></textarea>
                 </div>
             </div>
             </div>
             </div>
 
-                <button type="submit" class="btn primary_btn">Send</button>
+                <button type="submit" name="submit" class="btn primary_btn">Send</button>
             </form>
     </div>
     </div>
